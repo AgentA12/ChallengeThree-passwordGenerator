@@ -20,7 +20,7 @@ generateBtn.addEventListener("click", writePassword);
 
 
 
-
+//lengthPrompt function
 var lengthPrompt = function() {
   // prompt the user to input their desired length of the password word and store it in passwordLength
   var passwordLength = window.prompt("What would you like the length of your password to be? (Minimum 8, Max 128 characters)");
@@ -38,13 +38,73 @@ var lengthPrompt = function() {
     lengthPrompt();
   }
   
-  passwordDetails();
+  passwordDetailsLowercase();
 
 }
 
-  var passwordDetails = function(){
-    window.alert("it works")
-  }
+  //lowercase function
+  var passwordDetailsLowercase = function(){
+    //Prompt user to include lowercases
+    var lowercaseComfirm = window.prompt("Would you like to include lowercases? (type 'yes' or 'no')");
 
+    if(lowercaseComfirm === "yes" || lowercaseComfirm === "YES"){
+     passwordDetailsUppercase();
+    }
+    else if (lowercaseComfirm === "no" || lowercaseComfirm === "NO"){
+      passwordDetailsUppercase();
+  } 
+  else {
+    window.alert("Error, Please enter a valid input")
+    passwordDetailsLowercase();
+  }
+}
+  
+var passwordDetailsUppercase = function(){
+  var uppercaseComfirm = window.prompt("Would you like to include uppercases? (type 'yes' or 'no')");
+
+    if(uppercaseComfirm === "yes" || uppercaseComfirm === "YES"){
+      passwordDetailsNumeric();
+    }
+    else if (uppercaseComfirm === "no" || uppercaseComfirm === "NO"){
+      passwordDetailsNumeric();
+  } 
+  else {
+    window.alert("Error, Please enter a valid input")
+    passwordDetailsUppercase();
+  }
+}
+
+  var passwordDetailsNumeric = function(){
+    var numericComfirm = window.prompt("Would you like to include numeric characters? (type 'yes' or 'no')");
+
+    if(numericComfirm === "yes" || numericComfirm === "YES"){
+      passwordDetailsSpecial();
+    }
+    else if (numericComfirm === "no" || numericComfirm === "NO"){
+      passwordDetailsSpecial();
+  } 
+  else {
+    window.alert("Error, Please enter a valid input")
+    passwordDetailsNumeric();
+  }
+}
+
+var passwordDetailsSpecial = function(){
+  var specialComfirm = window.prompt("Would you like to include special characters? (type 'yes' or 'no')");
+
+  if(specialComfirm === "yes" || specialComfirm === "YES"){
+    window.alert("success!")
+    generatePassword();
+  }
+  else if (specialComfirm === "no" || specialComfirm === "NO"){
+    window.alert("success!")
+    generatePassword();
+} 
+else {
+  window.alert("Error, Please enter a valid input")
+  passwordDetailsSpecial();
+}
+
+}
   //call length prompt
   lengthPrompt();
