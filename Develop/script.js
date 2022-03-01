@@ -1,6 +1,6 @@
 // Assignment code here
 generatePassword = function(){
-  var specialCharacters = ['!', '#', '$', '@', '%', '^', '*'];
+ 
 }
 
 // Get references to the #generate element
@@ -22,12 +22,29 @@ generateBtn.addEventListener("click", writePassword);
 
 
 var lengthPrompt = function() {
+  // prompt the user to input their desired length of the password word and store it in passwordLength
   var passwordLength = window.prompt("What would you like the length of your password to be? (Minimum 8, Max 128 characters)");
-  passwordLength = parseInt(passwordLength);
-  console.log(Number.isInteger(passwordLength));
   
-    
+  // Change input to an integer
+  passwordLength = parseInt(passwordLength);
+  
+  //check if passwordlength is an valid integer
+  if(!Number.isInteger(passwordLength)){
+    window.alert("Error, Please enter a valid number.")
+    lengthPrompt();
+  }
+  else if(passwordLength < 8 || passwordLength > 128){
+    window.alert("Error, Please enter a number between 8 and 128.");
+    lengthPrompt();
+  }
+  
+  passwordDetails();
 
 }
 
-lengthPrompt();
+  var passwordDetails = function(){
+    window.alert("it works")
+  }
+
+  //call length prompt
+  lengthPrompt();
