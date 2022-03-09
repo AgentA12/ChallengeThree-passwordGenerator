@@ -1,5 +1,6 @@
 // Assignment code here
 generatePassword = function () {
+  //call respective function to store a value of true or false
   var passLengthBool = lengthPrompt();
 
   var passlowercaseBool = passwordDetailsLowercase();
@@ -10,6 +11,7 @@ generatePassword = function () {
 
   var passspecialBool = passwordDetailsSpecial();
 
+  //check to see if at lease one value is true else return to start of program
   if (
     passlowercaseBool === false &&
     passuppercaseBool === false &&
@@ -18,15 +20,16 @@ generatePassword = function () {
   ) {
     window.alert("Error, please select at lease one character type.");
     return null;
-  } 
+  }
 
-    var newPassword = applyPasswordDetails(
-      passLengthBool,
-      passlowercaseBool,
-      passuppercaseBool,
-      passnumericBool,
-      passspecialBool
-    );
+  //pass boolean values to applypassworddetails function and store returned value in newPassword
+  var newPassword = applyPasswordDetails(
+    passLengthBool,
+    passlowercaseBool,
+    passuppercaseBool,
+    passnumericBool,
+    passspecialBool
+  );
 
   return newPassword;
 };
@@ -70,7 +73,7 @@ var lengthPrompt = function () {
 //lowercase function
 var passwordDetailsLowercase = function () {
   lowercaseComfirm = window.confirm(
-    "Would you like to include lowercase letters? ('OK' for Yes 'CANCEL' for No)"
+    "Would you like to include lowercase letters? ('OK' for YES 'CANCEL' for NO)"
   );
   return lowercaseComfirm;
 };
@@ -78,21 +81,21 @@ var passwordDetailsLowercase = function () {
 //uppercase function
 var passwordDetailsUppercase = function () {
   uppercaseComfirm = window.confirm(
-    "Would you like to include uppercase letters? ('OK' for Yes 'CANCEL' for No)"
+    "Would you like to include uppercase letters? ('OK' for YES 'CANCEL' for NO)"
   );
   return uppercaseComfirm;
 };
 //numeric function
 var passwordDetailsNumeric = function () {
   numericComfirm = window.confirm(
-    "Would you like to include numeric characters? ('OK' for Yes 'CANCEL' for No)"
+    "Would you like to include numeric characters? ('OK' for YES 'CANCEL' for NO)"
   );
   return numericComfirm;
 };
 //special chars function
 var passwordDetailsSpecial = function () {
   specialComfirm = window.confirm(
-    "Would you like to include special characters? ('OK' for Yes 'CANCEL' for No)"
+    "Would you like to include special characters? ('OK' for YES 'CANCEL' for NO)"
   );
   return specialComfirm;
 };
@@ -118,12 +121,15 @@ var applyPasswordDetails = function (
     { specialchars },
   ];
   let password = "";
-
+  //loop through the number of times specified by "length"
   for (var n = 0; n < length; n++) {
+    //create random number and use it to index to random location in the arrayofbools
     var randomNum = Math.floor(Math.random() * arrayOfBools.length);
     var randomBool = arrayOfBools[randomNum];
-
+    //keyword "in" returns true if the string "lowercase" is a key/value pair
     if ("lowercases" in randomBool) {
+      //if the value of the key is true add a random index from the lowercasecharsstring to password
+      //Else negate n with -- and continue the loop to find correct key
       if (arrayOfBools[0].lowercases == true) {
         password +=
           lowercaseCharsString[
@@ -165,5 +171,6 @@ var applyPasswordDetails = function (
       }
     }
   }
+  //finally return the password
   return password;
 };
