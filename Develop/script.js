@@ -10,13 +10,24 @@ generatePassword = function () {
 
   var passspecialBool = passwordDetailsSpecial();
 
-  var newPassword = applyPasswordDetails(
-    passLengthBool,
-    passlowercaseBool,
-    passuppercaseBool,
-    passnumericBool,
-    passspecialBool
-  );
+  if (
+    passlowercaseBool === false &&
+    passuppercaseBool === false &&
+    passnumericBool === false &&
+    passspecialBool === false
+  ) {
+    window.alert("Error, please select at lease one character type.");
+    return null;
+  } 
+
+    var newPassword = applyPasswordDetails(
+      passLengthBool,
+      passlowercaseBool,
+      passuppercaseBool,
+      passnumericBool,
+      passspecialBool
+    );
+
   return newPassword;
 };
 
@@ -98,7 +109,7 @@ var applyPasswordDetails = function (
   let uppercaseCharsString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let lowercaseCharsString = "abcdefgfijklmnopqrstuvwxyz";
   let numericCharsString = "1234567890";
-  //make the array of booleans and object to keep variable name to reference to correct string of characters
+  //make the array of booleans aobject to keep variable name to reference to correct string of characters
   let arrayOfBools = [
     { lowercases },
     { uppercases },
