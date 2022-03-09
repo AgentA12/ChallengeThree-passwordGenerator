@@ -51,6 +51,7 @@ var lengthPrompt = function () {
   passwordLength = window.prompt(
     "What would you like the length of your password to be? (Minimum 8, Max 128 characters)"
   );
+
   // Change input to an integer
   passwordLength = parseInt(passwordLength);
 
