@@ -40,7 +40,6 @@ var lengthPrompt = function () {
   passwordLength = window.prompt(
     "What would you like the length of your password to be? (Minimum 8, Max 128 characters)"
   );
-
   // Change input to an integer
   passwordLength = parseInt(passwordLength);
 
@@ -61,11 +60,7 @@ var passwordDetailsLowercase = function () {
   lowercaseComfirm = window.confirm(
     "Would you like to include lowercase letters? ('OK' for Yes 'CANCEL' for No)"
   );
-  if (lowercaseComfirm) {
-    return lowercaseComfirm;
-  } else {
-    return lowercaseComfirm;
-  }
+  return lowercaseComfirm;
 };
 
 //------uppercase function
@@ -73,51 +68,33 @@ var passwordDetailsUppercase = function () {
   uppercaseComfirm = window.confirm(
     "Would you like to include uppercase letters? ('OK' for Yes 'CANCEL' for No)"
   );
-  if (uppercaseComfirm) {
-    return uppercaseComfirm;
-  } else {
-    return uppercaseComfirm;
-  }
+  return uppercaseComfirm;
 };
-
 //------numeric function
 var passwordDetailsNumeric = function () {
   numericComfirm = window.confirm(
     "Would you like to include numeric characters? ('OK' for Yes 'CANCEL' for No)"
   );
-  if (numericComfirm) {
-    return numericComfirm;
-  } else {
-    return numericComfirm;
-  }
+  return numericComfirm;
 };
-
 //-------special chars function
 var passwordDetailsSpecial = function () {
   specialComfirm = window.confirm(
     "Would you like to include special characters? ('OK' for Yes 'CANCEL' for No)"
   );
-  if (specialComfirm) {
-    return specialComfirm;
-  } else {
-    return specialComfirm;
-  }
+  return specialComfirm;
 };
 
-//-----applyPasswordDetails function
-var applyPasswordDetails = function (
-  length,
-  lowercases,
-  uppercases,
-  numericchars,
-  specialchars
-) {
+//-----applyPasswordDetails function with bool values passed as arguments
+var applyPasswordDetails = function (length, lowercases, uppercases, numericchars, specialchars) {
+  //declare strings of chars to be indexed through
   let specialChars = "!@#$%^&*()_-+=[]{};:./,<?>";
   let uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let lowercaseChars = "abcdefgfijklmnopqrstuvwxyz";
   let numericChars = "1234567890";
 
-  Password = [];
+  let Password = [];
+
   for (var i = 0; i < length; i++) {
     let randomNumLength10 = Math.floor(Math.random() * 10);
     let randomNumLength26 = Math.floor(Math.random() * 26);
