@@ -1,19 +1,14 @@
 // Assignment code here
 generatePassword = function () {
   var passLengthBool = lengthPrompt();
-  console.log(passLengthBool);
 
   var passlowercaseBool = passwordDetailsLowercase();
-  console.log(passlowercaseBool);
 
   var passuppercaseBool = passwordDetailsUppercase();
-  console.log(passuppercaseBool);
 
   var passnumericBool = passwordDetailsNumeric();
-  console.log(passnumericBool);
 
   var passspecialBool = passwordDetailsSpecial();
-  console.log(passspecialBool);
 
   var newPassword = applyPasswordDetails(
     passLengthBool,
@@ -60,6 +55,7 @@ var lengthPrompt = function () {
 
   return passwordLength;
 };
+
 //-----lowercase function
 var passwordDetailsLowercase = function () {
   lowercaseComfirm = window.confirm(
@@ -116,86 +112,24 @@ var applyPasswordDetails = function (
   numericchars,
   specialchars
 ) {
-  console.log(length, lowercases, uppercases, numericchars, specialchars);
-
-  let specialChars = ["!", "@", "$", "%", "^", "&", "*", "~", "(", ")"];
-
-  let uppercaseChars = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-  ];
-
-  let lowercaseChars = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ];
-
-  let numericArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+  let specialChars = "!@#$%^&*()_-+=[]{};:./,<?>";
+  let uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let lowercaseChars = "abcdefgfijklmnopqrstuvwxyz";
+  let numericChars = "1234567890";
 
   Password = [];
   for (var i = 0; i < length; i++) {
     let randomNumLength10 = Math.floor(Math.random() * 10);
     let randomNumLength26 = Math.floor(Math.random() * 26);
-    
-    if (lowercases){
+
+    if (lowercases) {
       Password[i] = lowercaseChars[randomNumLength26];
-    }
-    else if (uppercases){
+    } else if (uppercases) {
       Password[i] = uppercaseChars[randomNumLength26];
-    }
-    else if (numericchars){
-      Password[i] = numericArray[randomNumLength10];
-    }
-    else if (specialChars){
-      Password[i] = specialChars[randomNumLength10];
+    } else if (numericchars) {
+      Password[i] = numericChars[randomNumLength10];
+    } else if (specialChars) {
+      Password[i] = specialChars[randomNumLength26];
     }
   }
   Password = Password.join("");
