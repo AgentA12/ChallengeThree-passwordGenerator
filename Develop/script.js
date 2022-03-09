@@ -1,27 +1,33 @@
 // Assignment code here
 generatePassword = function () {
   var passLengthBool = lengthPrompt();
-  console.log(passLengthBool);
 
   var passlowercaseBool = passwordDetailsLowercase();
-  console.log(passlowercaseBool);
 
   var passuppercaseBool = passwordDetailsUppercase();
-  console.log(passuppercaseBool);
 
   var passnumericBool = passwordDetailsNumeric();
-  console.log(passnumericBool);
 
   var passspecialBool = passwordDetailsSpecial();
-  console.log(passspecialBool);
 
-  var newPassword = applyPasswordDetails(
-    passLengthBool,
-    passlowercaseBool,
-    passuppercaseBool,
-    passnumericBool,
-    passspecialBool
-  );
+  if (
+    passlowercaseBool === false &&
+    passuppercaseBool === false &&
+    passnumericBool === false &&
+    passspecialBool === false
+  ) {
+    window.alert("Error, please select at lease one character type.");
+    return null;
+  } 
+
+    var newPassword = applyPasswordDetails(
+      passLengthBool,
+      passlowercaseBool,
+      passuppercaseBool,
+      passnumericBool,
+      passspecialBool
+    );
+
   return newPassword;
 };
 
@@ -39,13 +45,12 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-//-------lengthPrompt function
+//lengthPrompt function
 var lengthPrompt = function () {
   // prompt the user to input their desired length of the password word and store it in passwordLength
   passwordLength = window.prompt(
     "What would you like the length of your password to be? (Minimum 8, Max 128 characters)"
   );
-
   // Change input to an integer
   passwordLength = parseInt(passwordLength);
 
@@ -60,55 +65,38 @@ var lengthPrompt = function () {
 
   return passwordLength;
 };
-//-----lowercase function
+
+//lowercase function
 var passwordDetailsLowercase = function () {
   lowercaseComfirm = window.confirm(
     "Would you like to include lowercase letters? ('OK' for Yes 'CANCEL' for No)"
   );
-  if (lowercaseComfirm) {
-    return lowercaseComfirm;
-  } else {
-    return lowercaseComfirm;
-  }
+  return lowercaseComfirm;
 };
 
-//------uppercase function
+//uppercase function
 var passwordDetailsUppercase = function () {
   uppercaseComfirm = window.confirm(
     "Would you like to include uppercase letters? ('OK' for Yes 'CANCEL' for No)"
   );
-  if (uppercaseComfirm) {
-    return uppercaseComfirm;
-  } else {
-    return uppercaseComfirm;
-  }
+  return uppercaseComfirm;
 };
-
-//------numeric function
+//numeric function
 var passwordDetailsNumeric = function () {
   numericComfirm = window.confirm(
     "Would you like to include numeric characters? ('OK' for Yes 'CANCEL' for No)"
   );
-  if (numericComfirm) {
-    return numericComfirm;
-  } else {
-    return numericComfirm;
-  }
+  return numericComfirm;
 };
-
-//-------special chars function
+//special chars function
 var passwordDetailsSpecial = function () {
   specialComfirm = window.confirm(
     "Would you like to include special characters? ('OK' for Yes 'CANCEL' for No)"
   );
-  if (specialComfirm) {
-    return specialComfirm;
-  } else {
-    return specialComfirm;
-  }
+  return specialComfirm;
 };
 
-//-----applyPasswordDetails function
+//applyPasswordDetails function with bool values passed as arguments
 var applyPasswordDetails = function (
   length,
   lowercases,
@@ -116,88 +104,65 @@ var applyPasswordDetails = function (
   numericchars,
   specialchars
 ) {
-  console.log(length, lowercases, uppercases, numericchars, specialchars);
-
-  let specialChars = ["!", "@", "$", "%", "^", "&", "*", "~", "(", ")"];
-
-  let uppercaseChars = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
+  //declare strings of chars to be indexed through
+  let specialCharsString = "!@#$%^&*()_-+=[]{};:./,<?>";
+  let uppercaseCharsString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let lowercaseCharsString = "abcdefgfijklmnopqrstuvwxyz";
+  let numericCharsString = "1234567890";
+  //make the array of booleans aobject to keep variable name to reference to correct string of characters
+  let arrayOfBools = [
+    { lowercases },
+    { uppercases },
+    { numericchars },
+    { specialchars },
   ];
+  let password = "";
 
-  let lowercaseChars = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ];
+  for (var n = 0; n < length; n++) {
+    var randomNum = Math.floor(Math.random() * arrayOfBools.length);
+    var randomBool = arrayOfBools[randomNum];
 
-  let numericArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-
-  Password = [];
-  for (var i = 0; i < length; i++) {
-    let randomNumLength10 = Math.floor(Math.random() * 10);
-    let randomNumLength26 = Math.floor(Math.random() * 26);
-    
-    if (lowercases){
-      Password[i] = lowercaseChars[randomNumLength26];
-    }
-    else if (uppercases){
-      Password[i] = uppercaseChars[randomNumLength26];
-    }
-    else if (numericchars){
-      Password[i] = numericArray[randomNumLength10];
-    }
-    else if (specialChars){
-      Password[i] = specialChars[randomNumLength10];
+    if ("lowercases" in randomBool) {
+      if (arrayOfBools[0].lowercases == true) {
+        password +=
+          lowercaseCharsString[
+            Math.floor(Math.random() * lowercaseCharsString.length)
+          ];
+      } else {
+        n--;
+        continue;
+      }
+    } else if ("uppercases" in randomBool) {
+      if (arrayOfBools[1].uppercases == true) {
+        password +=
+          uppercaseCharsString[
+            Math.floor(Math.random() * uppercaseCharsString.length)
+          ];
+      } else {
+        n--;
+        continue;
+      }
+    } else if ("numericchars" in randomBool) {
+      if (arrayOfBools[2].numericchars == true) {
+        password +=
+          numericCharsString[
+            Math.floor(Math.random() * numericCharsString.length)
+          ];
+      } else {
+        n--;
+        continue;
+      }
+    } else if ("specialchars" in randomBool) {
+      if (arrayOfBools[3].specialchars == true) {
+        password +=
+          specialCharsString[
+            Math.floor(Math.random() * specialCharsString.length)
+          ];
+      } else {
+        n--;
+        continue;
+      }
     }
   }
-  Password = Password.join("");
-  return Password;
+  return password;
 };
